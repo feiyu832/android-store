@@ -68,7 +68,7 @@ public class StorefrontInfo {
 
 			try {
 				JSONObject temp = new JSONObject(this.mStorefrontJSON);
-				this.orientationLandscape = ((JSONObject)temp.get("template")).getString("orientation").equals("landscape");
+				this.mOrientationLandscape = ((JSONObject)temp.get("template")).getString("orientation").equals("landscape");
 			} catch (JSONException e) {
 				StoreUtils.LogError(TAG, "There was a problem parsing the given storefront JSON.");
 				return;
@@ -103,7 +103,7 @@ public class StorefrontInfo {
 
 		try {
 			JSONObject temp = new JSONObject(this.mStorefrontJSON);
-			this.orientationLandscape = ((JSONObject)temp.get("template")).getString("orientation").equals("landscape");
+			this.mOrientationLandscape = ((JSONObject)temp.get("template")).getString("orientation").equals("landscape");
 		} catch (JSONException e) {
 			StoreUtils.LogError(TAG, "There was a problem parsing the given storefront JSON.");
 			return true;
@@ -153,19 +153,24 @@ public class StorefrontInfo {
         return mStorefrontJSON;
     }
 
+    public boolean isOrientationLandscape() {
+        return mOrientationLandscape;
+    }
+
+    public void setOrientationLandscape(boolean orientationLandscape) {
+        this.mOrientationLandscape = orientationLandscape;
+    }
+
     /** Private functions **/
 
     private StorefrontInfo() { }
-
-	/** Public members **/
-	
-	public boolean orientationLandscape;
 
     /** Private members **/
 
     private static final String TAG             = "SOOMLA StorefrontInfo";
     private static StorefrontInfo sInstance     = null;
     private static boolean mInitialized         = false;
+    private boolean mOrientationLandscape       = false;
 
     private String  mStorefrontJSON;
 }
